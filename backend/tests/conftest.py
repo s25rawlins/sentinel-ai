@@ -65,17 +65,9 @@ def sample_policy_data():
     """Sample policy data for testing."""
     return {
         "name": "Test Policy",
-        "description": "A test policy for unit testing",
-        "category": "content_safety",
-        "rules": [
-            {
-                "condition": "contains_profanity",
-                "action": "block",
-                "threshold": 0.8
-            }
-        ],
-        "performance_mode": "balanced",
-        "is_active": True
+        "definition": "A test policy for unit testing",
+        "category": "content_filtering",
+        "performance_mode": "balanced"
     }
 
 

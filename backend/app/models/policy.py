@@ -9,12 +9,18 @@ class PolicyStatus(str, enum.Enum):
     OPEN = "open"
     ACKNOWLEDGED = "acknowledged"
     CLOSED = "closed"
+    
+    def __str__(self):
+        return self.value
 
 class PolicySeverity(str, enum.Enum):
     LOW = "low"
     MEDIUM = "medium"
     HIGH = "high"
     CRITICAL = "critical"
+    
+    def __str__(self):
+        return self.value
 
 class PolicyCategory(str, enum.Enum):
     DATA_SECURITY = "data_security"
@@ -23,11 +29,17 @@ class PolicyCategory(str, enum.Enum):
     GOVERNANCE = "governance"
     INCIDENT_DETECTION = "incident_detection"
     CONTENT_FILTERING = "content_filtering"
+    
+    def __str__(self):
+        return self.value
 
 class PerformanceMode(str, enum.Enum):
     ROBUST = "robust"
     BALANCED = "balanced"
     FAST = "fast"
+    
+    def __str__(self):
+        return self.value
 
 class Policy(Base):
     __tablename__ = "policies"

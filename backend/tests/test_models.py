@@ -152,7 +152,7 @@ class TestEventModel:
             source="test_model",
             content="Test content",
             policy_id=policy.id,
-            metadata='{"user_id": "test_user"}'
+            event_metadata='{"user_id": "test_user"}'
         )
         
         db_session.add(event)
@@ -198,7 +198,7 @@ class TestViolationModel:
         violation = Violation(
             policy_id=policy.id,
             event_id=event.id,
-            violation_type="content_policy",
+            violation_type="content_violation",
             severity="medium",
             confidence_score=0.85,
             description="Test violation"
@@ -211,7 +211,7 @@ class TestViolationModel:
         assert violation.id is not None
         assert violation.policy_id == policy.id
         assert violation.event_id == event.id
-        assert violation.violation_type == "content_policy"
+        assert violation.violation_type == "content_violation"
         assert violation.severity == "medium"
         assert violation.confidence_score == 0.85
         assert violation.description == "Test violation"
@@ -273,7 +273,7 @@ class TestModelRelationships:
         violation = Violation(
             policy_id=policy.id,
             event_id=event.id,
-            violation_type="test_violation",
+            violation_type="content_violation",
             severity="low",
             confidence_score=0.5,
             description="Test violation"

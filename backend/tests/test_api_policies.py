@@ -22,9 +22,9 @@ class TestPoliciesAPI:
         
         data = response.json()
         assert data["name"] == sample_policy_data["name"]
-        assert data["description"] == sample_policy_data["description"]
+        assert data["definition"] == sample_policy_data["definition"]
         assert data["category"] == sample_policy_data["category"]
-        assert data["is_active"] == sample_policy_data["is_active"]
+        assert data["performance_mode"] == sample_policy_data["performance_mode"]
         assert "id" in data
         assert "created_at" in data
         assert "estimated_cost_per_event" in data
@@ -57,13 +57,13 @@ class TestPoliciesAPI:
         policy_id = create_response.json()["id"]
         
         # Update the policy
-        update_data = {"name": "Updated Policy Name", "is_active": False}
+        update_data = {"name": "Updated Policy Name", "status": "closed"}
         response = client.put(f"/api/policies/{policy_id}", json=update_data)
         assert response.status_code == status.HTTP_200_OK
         
         data = response.json()
         assert data["name"] == "Updated Policy Name"
-        assert data["is_active"] == False
+        assert data["status"] == "closed"
 
     def test_update_policy_not_found(self, client):
         """Test updating a policy that doesn't exist."""
@@ -95,22 +95,22 @@ class TestPoliciesAPI:
         """Test getting policies with status and category filters."""
         # Create multiple policies
         policy1 = sample_policy_data.copy()
-        policy1["category"] = "content_safety"
+        policy1["category"] = "data_security"
         policy1["name"] = "Policy 1"
         
         policy2 = sample_policy_data.copy()
-        policy2["category"] = "bias_detection"
+        policy2["category"] = "privacy"
         policy2["name"] = "Policy 2"
         
         client.post("/api/policies/", json=policy1)
         client.post("/api/policies/", json=policy2)
         
         # Test category filter
-        response = client.get("/api/policies/?category=content_safety")
+        response = client.get("/api/policies/?category=data_security")
         assert response.status_code == status.HTTP_200_OK
         data = response.json()
         assert len(data) == 1
-        assert data[0]["category"] == "content_safety"
+        assert data[0]["category"] == "data_security"
 
     def test_get_policies_pagination(self, client, sample_policy_data):
         """Test pagination parameters."""

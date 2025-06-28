@@ -34,7 +34,7 @@ class Violation(Base):
     status = Column(Enum(ViolationStatus), default=ViolationStatus.DETECTED)
     
     # Violation details
-    title = Column(String, nullable=False)
+    title = Column(String, nullable=True)  # Make nullable for backward compatibility
     description = Column(Text)
     details = Column(Text)  # JSON details about the violation
     confidence_score = Column(Float, default=0.0)  # 0.0 to 1.0
