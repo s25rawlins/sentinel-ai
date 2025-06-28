@@ -1,0 +1,180 @@
+# Project-wide ignores
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+sentinelai.db
+thirdlaw.db
+
+# Environment files
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# Dependency directories
+node_modules/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Temporary folders
+tmp/
+temp/
+
+# Build outputs
+/build
+/dist
+
+# Cache
+.cache
+.parcel-cache
+.eslintcache
+.stylelintcache
+
+# TypeScript
+*.tsbuildinfo
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+.docker/
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+*.ipynb
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+.hypothesis/
+.nyc_output
+
+# Linting and formatting
+.flake8
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.ruff_cache/
+
+# Package managers
+yarn.lock
+package-lock.json
+pnpm-lock.yaml
+poetry.lock
+Pipfile.lock
+
+# Build tools and bundlers
+.webpack/
+.rollup.cache/
+.turbo/
+.next/
+.nuxt/
+.output/
+.vercel/
+.netlify/
+
+# Storybook
+.out
+.storybook-out
+storybook-static/
+
+# Sentry
+.sentryclirc
+
+# Local development files
+.local
+.history/
+.vscode/settings.json
+.vscode/launch.json
+
+# Security and secrets
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+secrets.json
+.secrets/
+
+# Monitoring and analytics
+.sentry-native/
+
+# Miscellaneous
+*.orig
+*.rej
+.sass-cache/
+.connect.lock
+.typings/
