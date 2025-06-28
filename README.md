@@ -1,6 +1,6 @@
 # SentinelAI AI Governance Platform
 
-A complete working prototype of an AI governance and monitoring platform inspired by SentinelAI, built with Python/FastAPI backend and React frontend.
+A complete working prototype of SentinelAI, an AI governance and monitoring platform built with Python/FastAPI backend and React frontend.
 
 ## Features
 
@@ -180,6 +180,94 @@ open http://localhost:8000/docs
 - SQLite database automatically created on first run
 - Sample data seeded automatically
 - Database file: `sentinelai.db`
+
+## Testing
+
+This project includes a comprehensive testing suite for both backend and frontend components.
+
+### Backend Testing
+
+The backend uses **pytest** with **nox** for comprehensive testing:
+
+```bash
+cd backend
+
+# Install test dependencies
+pip install -r requirements-dev.txt
+
+# Run all tests with nox (recommended)
+nox
+
+# Run specific test sessions
+nox -s tests          # Run tests only
+nox -s lint           # Run linting
+nox -s type_check     # Run type checking
+nox -s format         # Format code
+
+# Run tests with pytest directly
+pytest                # Run all tests
+pytest --cov=app     # Run with coverage
+pytest -m api        # Run API tests only
+pytest -m unit       # Run unit tests only
+```
+
+**Test Coverage:**
+- API endpoint testing with FastAPI TestClient
+- Database model testing with SQLAlchemy
+- Unit tests for business logic
+- Integration tests for complete workflows
+- Minimum 80% code coverage requirement
+
+### Frontend Testing
+
+The frontend uses **Jest** and **React Testing Library**:
+
+```bash
+cd frontend
+
+# Run tests
+npm test              # Interactive watch mode
+npm run test:coverage # With coverage report
+npm run test:ci       # CI mode (no watch)
+
+# Debug tests
+npm run test:debug
+```
+
+**Test Features:**
+- Component testing with React Testing Library
+- API mocking with Mock Service Worker (MSW)
+- User interaction testing
+- Accessibility testing
+- Minimum 70% code coverage requirement
+
+### Test Structure
+
+```
+backend/tests/
+├── conftest.py              # Test configuration and fixtures
+├── test_main.py            # Main application tests
+├── test_api_policies.py    # Policy API tests
+├── test_models.py          # Database model tests
+└── ...
+
+frontend/src/
+├── components/__tests__/    # Component tests
+├── services/__tests__/      # Service tests
+├── mocks/                  # MSW mock handlers
+└── setupTests.ts           # Test setup
+```
+
+### Continuous Integration
+
+GitHub Actions workflow runs:
+- Backend tests across Python 3.9, 3.10, 3.11
+- Frontend tests across Node.js 18.x, 20.x
+- Integration tests with PostgreSQL
+- Security scanning with safety and bandit
+- Code quality checks (linting, formatting, type checking)
+
+See [TESTING_GUIDE.md](TESTING_GUIDE.md) for detailed testing documentation.
 
 ## Future Enhancements
 
