@@ -55,7 +55,8 @@ def get_events_timeline(days: int = 7, db: Session = Depends(get_db)):
     # Structure data for frontend charting library
     timeline_data = {}
     for event_date, severity, count in events_by_date:
-        date_str = event_date.strftime('%Y-%m-%d')
+        # event_date is already a string from func.date()
+        date_str = str(event_date)
         if date_str not in timeline_data:
             timeline_data[date_str] = {
                 'date': date_str,
