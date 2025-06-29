@@ -1,17 +1,21 @@
-# SentinelAI Backend Code Walkthrough
+# Sentinel AI Backend Code Walkthrough
 
 ## Overview
 
-The SentinelAI backend is a FastAPI-based Python application that provides a comprehensive AI governance and monitoring platform. It manages policies, events, violations, and provides real-time monitoring capabilities for AI systems.
+The Sentinel AI backend is a FastAPI-based Python application that provides a comprehensive AI governance and monitoring platform. It manages policies, events, violations, and provides real-time monitoring capabilities for AI systems.
 
 ## Architecture
 
 ### Technology Stack
-- **Framework**: FastAPI (Python web framework)
-- **Database**: SQLAlchemy ORM with PostgreSQL/SQLite
+- **Framework**: FastAPI 0.104.1 (Modern Python web framework)
+- **Database**: SQLAlchemy 2.0.23 ORM with SQLite (development)
 - **API Documentation**: Automatic OpenAPI/Swagger documentation
 - **CORS**: Enabled for cross-origin requests
 - **Real-time**: WebSocket support for live updates
+- **Authentication**: Python-JOSE with cryptography support
+- **Password Hashing**: Passlib with bcrypt
+- **HTTP Client**: HTTPX for external API calls
+- **File Handling**: Aiofiles for async file operations
 
 ### Project Structure
 ```

@@ -1,6 +1,6 @@
-# Testing Guide for SentinelAI
+# Testing Guide for Sentinel AI
 
-This document provides comprehensive information about the testing setup and practices for both the backend and frontend of the SentinelAI project.
+This document provides comprehensive information about the testing setup and practices for both the backend and frontend of the Sentinel AI project.
 
 ## Overview
 

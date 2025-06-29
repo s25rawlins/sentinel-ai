@@ -30,27 +30,75 @@ An AI governance and monitoring platform built with Python/FastAPI backend and R
 - Sample data seeding for demonstration
 
 ### Frontend Interface
-- React-based single-page application
-- Responsive design with Tailwind CSS
+- React TypeScript single-page application
+- Responsive design with CSS custom properties
 - Real-time data fetching and display
 - Professional Sentinel AI-inspired UI/UX
+- Dark/light theme support with persistent storage
 
 ## Architecture
 
 ```
-sentinelai-platform/
+sentinel-ai/
 ├── backend/                 # Python/FastAPI Backend
 │   ├── app/
 │   │   ├── api/            # API route handlers
+│   │   │   ├── dashboard.py    # Dashboard statistics endpoints
+│   │   │   ├── events.py       # Event management endpoints
+│   │   │   ├── policies.py     # Policy management endpoints
+│   │   │   └── violations.py   # Violation management endpoints
 │   │   ├── models/         # SQLAlchemy database models
+│   │   │   ├── event.py        # Event data model
+│   │   │   ├── policy.py       # Policy data model
+│   │   │   ├── policy_template.py # Policy template model
+│   │   │   ├── user.py         # User data model
+│   │   │   └── violation.py    # Violation data model
 │   │   ├── core/           # Pydantic schemas
+│   │   │   └── schemas.py      # API data models
 │   │   ├── services/       # Business logic and data seeding
+│   │   │   └── data_seeder.py  # Database seeding utilities
 │   │   ├── database/       # Database configuration
+│   │   │   └── base.py         # Database setup and session management
 │   │   └── main.py         # FastAPI application entry point
+│   ├── tests/              # Test suite
+│   │   ├── conftest.py         # Test configuration and fixtures
+│   │   ├── test_main.py        # Main application tests
+│   │   ├── test_api_policies.py # Policy API tests
+│   │   └── test_models.py      # Database model tests
+│   ├── alembic/            # Database migrations
 │   ├── requirements.txt    # Python dependencies
-│   └── venv/              # Virtual environment
-└── frontend/
-    └── index.html         # React frontend application
+│   ├── requirements-dev.txt # Development dependencies
+│   ├── pyproject.toml      # Tool configurations
+│   ├── pytest.ini         # Pytest configuration
+│   ├── noxfile.py          # Nox test automation
+│   └── .flake8            # Linting configuration
+└── frontend/               # React TypeScript Frontend
+    ├── public/             # Static assets
+    │   ├── index.html          # Main HTML template
+    │   ├── favicon.ico         # Application favicon
+    │   └── manifest.json       # PWA manifest
+    ├── src/
+    │   ├── components/         # React components
+    │   │   ├── Dashboard.tsx       # Dashboard overview component
+    │   │   ├── Navigation.tsx      # Main navigation component
+    │   │   ├── Policies.tsx        # Policies management component
+    │   │   ├── Events.tsx          # Events monitoring component
+    │   │   ├── Violations.tsx      # Violations management component
+    │   │   └── __tests__/          # Component tests
+    │   ├── services/           # API service layer
+    │   │   ├── api.ts              # API client and methods
+    │   │   └── __tests__/          # Service tests
+    │   ├── mocks/              # MSW mock handlers
+    │   │   ├── handlers.ts         # API mock handlers
+    │   │   └── server.ts           # MSW server setup
+    │   ├── App.tsx             # Main application component
+    │   ├── App.css             # Global application styles
+    │   ├── index.tsx           # Application entry point
+    │   ├── index.css           # Global CSS reset and base styles
+    │   └── setupTests.ts       # Test setup and configuration
+    ├── package.json            # Dependencies and scripts
+    ├── tsconfig.json          # TypeScript configuration
+    └── README.md              # Frontend-specific documentation
 ```
 
 ## Technology Stack
@@ -63,48 +111,64 @@ sentinelai-platform/
 - **Uvicorn** - ASGI server implementation
 
 ### Frontend
-- **React 18** - JavaScript library for building user interfaces
-- **Tailwind CSS** - Utility-first CSS framework
-- **Font Awesome** - Icon library
-- **Babel** - JavaScript compiler for JSX transformation
+- **React 19** - JavaScript library for building user interfaces
+- **TypeScript** - Static type checking for JavaScript
+- **React Router DOM** - Client-side routing for single-page applications
+- **Axios** - HTTP client for API communication
+- **Recharts** - Data visualization and charting library
+- **Lucide React** - Modern icon library
+- **CSS Custom Properties** - Native CSS theming system
 
 ## Getting Started
 
 ### Prerequisites
-- Python 3.12+
-- Modern web browser
+- Python 3.9+
+- Node.js 16+
+- npm or yarn
 
 ### Backend Setup
 
 1. **Navigate to backend directory:**
    ```bash
-   cd sentinelai-platform/backend
+   cd backend
    ```
 
 2. **Create and activate virtual environment:**
    ```bash
    python3 -m venv venv
-   source venv/bin/activate
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 
 3. **Install dependencies:**
    ```bash
    pip install -r requirements.txt
-   pip install email-validator
    ```
 
 4. **Start the server:**
    ```bash
-   python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+   uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
    ```
 
 ### Frontend Setup
 
-1. **Open the frontend:**
+1. **Navigate to frontend directory:**
    ```bash
-   # Open in browser
-   open sentinelai-platform/frontend/index.html
-   # Or navigate to: file:///path/to/sentinelai-platform/frontend/index.html
+   cd frontend
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server:**
+   ```bash
+   npm start
+   ```
+
+4. **Open in browser:**
+   ```
+   http://localhost:3000
    ```
 
 ## Sample Data

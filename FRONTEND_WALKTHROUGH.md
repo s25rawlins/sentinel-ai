@@ -1,19 +1,20 @@
-# SentinelAI Frontend Code Walkthrough
+# Sentinel AI Frontend Code Walkthrough
 
 ## Overview
 
-The SentinelAI frontend is a modern React TypeScript application that provides a comprehensive user interface for AI governance and monitoring. It features a responsive dashboard, real-time data visualization, and intuitive management interfaces for policies, events, and violations.
+The Sentinel AI frontend is a modern React TypeScript application that provides a comprehensive user interface for AI governance and monitoring. It features a responsive dashboard, real-time data visualization, and intuitive management interfaces for policies, events, and violations.
 
 ## Architecture
 
 ### Technology Stack
-- **Framework**: React 18 with TypeScript
-- **Routing**: React Router DOM for client-side navigation
-- **HTTP Client**: Axios for API communication
-- **Charts**: Recharts for data visualization
-- **Icons**: Lucide React for consistent iconography
+- **Framework**: React 19 with TypeScript 4.9.5
+- **Routing**: React Router DOM 7.6.3 for client-side navigation
+- **HTTP Client**: Axios 1.10.0 for API communication
+- **Charts**: Recharts 3.0.2 for data visualization
+- **Icons**: Lucide React 0.525.0 for consistent iconography
 - **Styling**: CSS with CSS custom properties for theming
-- **Build Tool**: Create React App (CRA)
+- **Testing**: Jest with React Testing Library and MSW
+- **Build Tool**: Create React App (CRA) with React Scripts 5.0.1
 
 ### Project Structure
 ```
@@ -21,22 +22,39 @@ frontend/
 ├── public/
 │   ├── index.html           # Main HTML template
 │   ├── favicon.ico          # Application favicon
-│   └── manifest.json        # PWA manifest
+│   ├── logo192.png          # App logo (192x192)
+│   ├── logo512.png          # App logo (512x512)
+│   ├── manifest.json        # PWA manifest
+│   └── robots.txt           # Search engine robots file
 ├── src/
 │   ├── App.tsx              # Main application component
 │   ├── App.css              # Global application styles
+│   ├── App.test.tsx         # App component tests
 │   ├── index.tsx            # Application entry point
 │   ├── index.css            # Global CSS reset and base styles
+│   ├── logo.svg             # React logo
+│   ├── react-app-env.d.ts   # React app type definitions
+│   ├── reportWebVitals.ts   # Web vitals reporting
+│   ├── setupTests.ts        # Test setup and configuration
 │   ├── components/          # React components
-│   │   ├── Dashboard.tsx    # Dashboard overview component
-│   │   ├── Navigation.tsx   # Main navigation component
-│   │   ├── Policies.tsx     # Policies management component
-│   │   ├── Events.tsx       # Events monitoring component
-│   │   └── Violations.tsx   # Violations management component
-│   └── services/
-│       └── api.ts           # API service layer
+│   │   ├── Dashboard.tsx        # Dashboard overview component
+│   │   ├── Navigation.tsx       # Main navigation component
+│   │   ├── Policies.tsx         # Policies management component
+│   │   ├── Events.tsx           # Events monitoring component
+│   │   ├── Violations.tsx       # Violations management component
+│   │   └── __tests__/           # Component tests
+│   │       ├── Dashboard.test.tsx   # Dashboard component tests
+│   │       └── Policies.test.tsx    # Policies component tests
+│   ├── services/            # API service layer
+│   │   ├── api.ts               # API client and methods
+│   │   └── __tests__/           # Service tests
+│   │       └── api.test.ts      # API service tests
+│   └── mocks/               # MSW mock handlers
+│       ├── handlers.ts          # API mock handlers
+│       └── server.ts            # MSW server setup
 ├── package.json             # Dependencies and scripts
-└── tsconfig.json           # TypeScript configuration
+├── tsconfig.json           # TypeScript configuration
+└── README.md               # Frontend-specific documentation
 ```
 
 ## Core Components
