@@ -267,10 +267,10 @@ def seed_database():
             db.add(violation)
         db.commit()
         
-        print("Database seeded successfully!")
+        pass
         
     except Exception as e:
-        print(f"Error seeding database: {e}")
         db.rollback()
+        raise
     finally:
         db.close()
