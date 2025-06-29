@@ -1,13 +1,13 @@
-# SentinelAI AI Governance Platform
+# Sentinel AI Governance Platform
 
-A complete working prototype of SentinelAI, an AI governance and monitoring platform built with Python/FastAPI backend and React frontend.
+An AI governance and monitoring platform built with Python/FastAPI backend and React frontend.
 
 ## Features
 
 ### Dashboard
 - Real-time statistics (Total Policies, Active Policies, Events, Violations)
 - Recent activity feed with severity indicators
-- Clean, professional UI matching SentinelAI design
+- Clean, professional UI matching Sentinel AI design
 
 ### Policies Management
 - Complete CRUD operations for governance policies
@@ -33,7 +33,7 @@ A complete working prototype of SentinelAI, an AI governance and monitoring plat
 - React-based single-page application
 - Responsive design with Tailwind CSS
 - Real-time data fetching and display
-- Professional SentinelAI-inspired UI/UX
+- Professional Sentinel AI-inspired UI/UX
 
 ## Architecture
 
@@ -160,7 +160,7 @@ The application comes pre-loaded with realistic sample data:
 - Intervention management (block, redact, notify)
 
 ### 4. Professional UI/UX
-- Clean, modern interface matching SentinelAI design
+- Clean, modern interface matching Sentinel AI design
 - Responsive layout with proper navigation
 - Status badges and severity indicators
 - Professional color scheme and typography
@@ -274,17 +274,3 @@ See [TESTING_GUIDE.md](TESTING_GUIDE.md) for detailed testing documentation.
 - User authentication and authorization
 - Advanced analytics and reporting
 - Real LLM integration for live monitoring
-- Advanced rule engine for policy evaluation
-- Export capabilities for compliance reporting
-- Multi-tenant support for enterprise deployment
-
-## Demo
-
-The application successfully demonstrates:
-
-1. **Dashboard Overview** - Real-time statistics and activity feed
-2. **Policies Management** - Complete governance policy lifecycle
-3. **Events Monitoring** - AI interaction tracking and violation detection
-4. **Professional UI** - Production-ready interface design
-
-This prototype provides a solid foundation for building a comprehensive AI governance platform similar to SentinelAI's vision.
