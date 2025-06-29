@@ -1,6 +1,6 @@
 # Sentinel AI Governance Platform
 
-An AI governance and monitoring platform built with Python/FastAPI backend and React frontend.
+A comprehensive AI governance and monitoring platform that provides real-time oversight of AI systems, automated policy compliance enforcement, violation detection and intervention capabilities, and centralized dashboard analytics for enterprise AI risk management.
 
 ## Features
 
