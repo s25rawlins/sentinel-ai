@@ -16,7 +16,6 @@ def get_policies(
     category: Optional[str] = None,
     db: Session = Depends(get_db)
 ):
-    """Get all policies with optional filtering"""
     query = db.query(PolicyModel)
     
     if status:
@@ -29,7 +28,6 @@ def get_policies(
 
 @router.get("/{policy_id}", response_model=Policy)
 def get_policy(policy_id: int, db: Session = Depends(get_db)):
-    """Get a specific policy by ID"""
     policy = db.query(PolicyModel).filter(PolicyModel.id == policy_id).first()
     if not policy:
         raise HTTPException(status_code=404, detail="Policy not found")
@@ -37,8 +35,7 @@ def get_policy(policy_id: int, db: Session = Depends(get_db)):
 
 @router.post("/", response_model=Policy)
 def create_policy(policy: PolicyCreate, db: Session = Depends(get_db)):
-    """Create a new policy"""
-    # Calculate estimated costs based on performance mode
+    # Performance mode affects cost and latency for resource planning
     cost_multipliers = {"fast": 0.5, "balanced": 1.0, "robust": 2.0}
     latency_multipliers = {"fast": 50, "balanced": 100, "robust": 200}
     
@@ -46,7 +43,7 @@ def create_policy(policy: PolicyCreate, db: Session = Depends(get_db)):
         **policy.dict(),
         estimated_cost_per_event=240 * cost_multipliers.get(policy.performance_mode, 1.0),
         estimated_latency_ms=latency_multipliers.get(policy.performance_mode, 100),
-        created_by=1  # TODO: Get from authenticated user
+        created_by=1  # Hardcoded until authentication system is implemented
     )
     
     db.add(db_policy)
@@ -56,7 +53,6 @@ def create_policy(policy: PolicyCreate, db: Session = Depends(get_db)):
 
 @router.put("/{policy_id}", response_model=Policy)
 def update_policy(policy_id: int, policy_update: PolicyUpdate, db: Session = Depends(get_db)):
-    """Update an existing policy"""
     db_policy = db.query(PolicyModel).filter(PolicyModel.id == policy_id).first()
     if not db_policy:
         raise HTTPException(status_code=404, detail="Policy not found")
@@ -71,7 +67,6 @@ def update_policy(policy_id: int, policy_update: PolicyUpdate, db: Session = Dep
 
 @router.delete("/{policy_id}")
 def delete_policy(policy_id: int, db: Session = Depends(get_db)):
-    """Delete a policy"""
     db_policy = db.query(PolicyModel).filter(PolicyModel.id == policy_id).first()
     if not db_policy:
         raise HTTPException(status_code=404, detail="Policy not found")
@@ -82,18 +77,16 @@ def delete_policy(policy_id: int, db: Session = Depends(get_db)):
 
 @router.get("/templates/", response_model=List[PolicyTemplate])
 def get_policy_templates(db: Session = Depends(get_db)):
-    """Get all policy templates"""
     templates = db.query(PolicyTemplateModel).filter(PolicyTemplateModel.is_active == "true").all()
     return templates
 
 @router.post("/{policy_id}/test")
 def test_policy(policy_id: int, test_data: dict, db: Session = Depends(get_db)):
-    """Test a policy against sample data"""
     policy = db.query(PolicyModel).filter(PolicyModel.id == policy_id).first()
     if not policy:
         raise HTTPException(status_code=404, detail="Policy not found")
     
-    # Simple mock evaluation
+    # Mock evaluation until real policy engine is integrated
     result = {
         "policy_id": policy_id,
         "test_passed": True,

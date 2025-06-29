@@ -7,7 +7,6 @@ from app.models.policy import PolicyStatus, PolicySeverity, PolicyCategory, Perf
 from app.models.event import EventType, EventSeverity, EventStatus
 from app.models.violation import ViolationType, ViolationSeverity, ViolationStatus
 
-# User schemas
 class UserBase(BaseModel):
     username: str
     email: EmailStr
@@ -29,7 +28,6 @@ class User(UserBase):
     class Config:
         from_attributes = True
 
-# Policy schemas
 class PolicyBase(BaseModel):
     name: str
     definition: str
@@ -64,7 +62,6 @@ class Policy(PolicyBase):
     class Config:
         from_attributes = True
 
-# Event schemas
 class EventBase(BaseModel):
     event_id: str
     event_type: EventType
@@ -95,7 +92,6 @@ class Event(EventBase):
     class Config:
         from_attributes = True
 
-# Violation schemas
 class ViolationBase(BaseModel):
     violation_type: ViolationType
     severity: ViolationSeverity
@@ -125,7 +121,6 @@ class Violation(ViolationBase):
     class Config:
         from_attributes = True
 
-# Policy Template schemas
 class PolicyTemplateBase(BaseModel):
     name: str
     category: PolicyCategory
@@ -145,7 +140,6 @@ class PolicyTemplate(PolicyTemplateBase):
     class Config:
         from_attributes = True
 
-# Dashboard schemas
 class DashboardStats(BaseModel):
     total_policies: int
     active_policies: int

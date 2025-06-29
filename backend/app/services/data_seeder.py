@@ -14,16 +14,14 @@ def seed_database():
     db = SessionLocal()
     
     try:
-        # Check if data already exists
         if db.query(User).count() > 0:
             return  # Data already seeded
         
-        # Create users
         users = [
             User(
                 username="admin",
                 email="admin@sentinelai.ai",
-                hashed_password="$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW",  # secret
+                hashed_password="$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW",  # Password: "secret"
                 role=UserRole.ADMIN
             ),
             User(
@@ -50,7 +48,6 @@ def seed_database():
             db.add(user)
         db.commit()
         
-        # Create policy templates
         policy_templates = [
             PolicyTemplate(
                 name="Prompt Injection Prevention",
@@ -90,7 +87,6 @@ def seed_database():
             db.add(template)
         db.commit()
         
-        # Create policies
         policies = [
             Policy(
                 name="Sunshine Acceptable Use Policy",
@@ -218,7 +214,6 @@ def seed_database():
             db.add(policy)
         db.commit()
         
-        # Create events
         base_time = datetime.utcnow()
         events = []
         
@@ -250,9 +245,8 @@ def seed_database():
             db.add(event)
         db.commit()
         
-        # Create violations
         violations = []
-        for i, event in enumerate(events[:20]):  # Create violations for first 20 events
+        for i, event in enumerate(events[:20]):  # Only first 20 events to keep demo data manageable
             violation = Violation(
                 violation_type=random.choice(list(ViolationType)),
                 severity=random.choice(list(ViolationSeverity)),

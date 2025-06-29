@@ -1,6 +1,5 @@
 import nox
 
-# Define Python versions to test against
 nox.options.sessions = ["tests", "lint", "type_check"]
 
 
@@ -10,7 +9,6 @@ def tests(session):
     session.install("-r", "requirements.txt")
     session.install("-r", "requirements-dev.txt")
     
-    # Run tests with coverage
     session.run(
         "pytest",
         "--cov=app",
@@ -27,13 +25,8 @@ def lint(session):
     """Run linting tools."""
     session.install("-r", "requirements-dev.txt")
     
-    # Run black for code formatting
     session.run("black", "--check", "app", "tests")
-    
-    # Run isort for import sorting
     session.run("isort", "--check-only", "app", "tests")
-    
-    # Run flake8 for style guide enforcement
     session.run("flake8", "app", "tests")
 
 

@@ -6,6 +6,7 @@
 *.sqlite3
 sentinelai.db
 thirdlaw.db
+test.db
 
 # Environment files
 .env
@@ -74,6 +75,7 @@ MANIFEST
 
 # Virtual environments
 venv/
+.venv/
 env/
 ENV/
 env.bak/
@@ -122,7 +124,6 @@ coverage.xml
 .nyc_output
 
 # Linting and formatting
-.flake8
 .mypy_cache/
 .dmypy.json
 dmypy.json
@@ -171,6 +172,10 @@ secrets.json
 
 # Monitoring and analytics
 .sentry-native/
+
+# Alembic migration files (keep structure, ignore auto-generated)
+alembic/versions/*.py
+!alembic/versions/__init__.py
 
 # Miscellaneous
 *.orig

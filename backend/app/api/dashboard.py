@@ -12,20 +12,14 @@ router = APIRouter()
 
 @router.get("/stats", response_model=DashboardStats)
 def get_dashboard_stats(db: Session = Depends(get_db)):
-    """Get overall dashboard statistics"""
-    
-    # Policy statistics
     total_policies = db.query(PolicyModel).count()
     active_policies = db.query(PolicyModel).filter(PolicyModel.status == PolicyStatus.OPEN).count()
     
-    # Event statistics
     total_events = db.query(EventModel).count()
     
-    # Events in last 24 hours
     yesterday = datetime.utcnow() - timedelta(days=1)
     events_last_24h = db.query(EventModel).filter(EventModel.trigger_date >= yesterday).count()
     
-    # Violation statistics
     open_violations = db.query(ViolationModel).filter(
         ViolationModel.status.in_([ViolationStatus.DETECTED, ViolationStatus.INVESTIGATING])
     ).count()
@@ -45,11 +39,8 @@ def get_dashboard_stats(db: Session = Depends(get_db)):
 
 @router.get("/events/timeline")
 def get_events_timeline(days: int = 7, db: Session = Depends(get_db)):
-    """Get event timeline for the last N days"""
-    
     start_date = datetime.utcnow() - timedelta(days=days)
     
-    # Get events grouped by date and severity
     events_by_date = db.query(
         func.date(EventModel.trigger_date).label('date'),
         EventModel.severity,
@@ -61,7 +52,7 @@ def get_events_timeline(days: int = 7, db: Session = Depends(get_db)):
         EventModel.severity
     ).all()
     
-    # Organize data by date
+    # Structure data for frontend charting library
     timeline_data = {}
     for event_date, severity, count in events_by_date:
         date_str = event_date.strftime('%Y-%m-%d')
@@ -84,7 +75,6 @@ def get_events_timeline(days: int = 7, db: Session = Depends(get_db)):
 
 @router.get("/violations/by-category")
 def get_violations_by_category(db: Session = Depends(get_db)):
-    """Get violation counts by category"""
     
     violations_by_type = db.query(
         ViolationModel.violation_type,
@@ -98,7 +88,6 @@ def get_violations_by_category(db: Session = Depends(get_db)):
 
 @router.get("/policies/by-status")
 def get_policies_by_status(db: Session = Depends(get_db)):
-    """Get policy counts by status"""
     
     policies_by_status = db.query(
         PolicyModel.status,
@@ -112,19 +101,14 @@ def get_policies_by_status(db: Session = Depends(get_db)):
 
 @router.get("/recent-activity")
 def get_recent_activity(limit: int = 10, db: Session = Depends(get_db)):
-    """Get recent activity across the platform"""
-    
-    # Get recent events
     recent_events = db.query(EventModel).order_by(
         EventModel.trigger_date.desc()
     ).limit(limit).all()
     
-    # Get recent violations
     recent_violations = db.query(ViolationModel).order_by(
         ViolationModel.created_at.desc()
     ).limit(limit).all()
     
-    # Combine and sort by timestamp
     activities = []
     
     for event in recent_events:
@@ -147,18 +131,13 @@ def get_recent_activity(limit: int = 10, db: Session = Depends(get_db)):
             "status": violation.status
         })
     
-    # Sort by timestamp and return top items
     activities.sort(key=lambda x: x["timestamp"], reverse=True)
     return activities[:limit]
 
 @router.get("/performance-metrics")
 def get_performance_metrics(db: Session = Depends(get_db)):
-    """Get system performance metrics"""
-    
-    # Average event processing time
     avg_duration = db.query(func.avg(EventModel.duration_ms)).scalar() or 0
     
-    # Policy evaluation performance by mode
     policy_performance = db.query(
         PolicyModel.performance_mode,
         func.avg(PolicyModel.estimated_latency_ms).label('avg_latency'),
