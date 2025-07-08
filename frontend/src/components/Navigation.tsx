@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Shield, BarChart3, FileText, AlertTriangle, Moon, Sun, Menu, X, Zap, Activity } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Shield, BarChart3, FileText, AlertTriangle, Moon, Sun, Menu, X, Activity, LogOut, User } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
 
 interface NavigationProps {
   darkMode: boolean;
@@ -9,7 +10,14 @@ interface NavigationProps {
 
 const Navigation: React.FC<NavigationProps> = ({ darkMode, toggleTheme }) => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+  const { user, logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/');
+  };
 
   const navItems = [
     { path: '/dashboard', label: 'Command Center', icon: BarChart3, description: 'System Overview' },
@@ -173,12 +181,31 @@ const Navigation: React.FC<NavigationProps> = ({ darkMode, toggleTheme }) => {
         <div className="nav-footer">
           <div className="user-info">
             <div className="user-avatar">
-              <Zap size={18} />
+              <User size={18} />
             </div>
             <div className="user-details">
-              <span className="user-name">ADMIN</span>
-              <span className="user-role">NEURAL OPERATOR</span>
+              <span className="user-name">{user?.username.toUpperCase() || 'USER'}</span>
+              <span className="user-role">{user?.role.toUpperCase() || 'OPERATOR'}</span>
             </div>
+            <button 
+              className="logout-button"
+              onClick={handleLogout}
+              title="Logout"
+              style={{
+                background: 'transparent',
+                border: 'none',
+                color: 'var(--text-muted)',
+                cursor: 'pointer',
+                padding: '0.5rem',
+                borderRadius: '8px',
+                transition: 'var(--transition-smooth)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+            >
+              <LogOut size={16} />
+            </button>
           </div>
         </div>
       </nav>

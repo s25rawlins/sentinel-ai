@@ -152,3 +152,25 @@ class EventSummary(BaseModel):
     date: str
     count: int
     severity_breakdown: dict
+
+# Authentication Schemas
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+class TokenData(BaseModel):
+    username: Optional[str] = None
+
+class LoginRequest(BaseModel):
+    username: str
+    password: str
+
+class UserResponse(BaseModel):
+    id: int
+    username: str
+    email: str
+    role: UserRole
+    created_at: datetime
+
+    class Config:
+        from_attributes = True

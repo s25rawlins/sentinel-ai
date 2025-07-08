@@ -8,6 +8,7 @@ from app.models.policy import Policy, PolicyStatus, PolicySeverity, PolicyCatego
 from app.models.event import Event, EventType, EventSeverity, EventStatus
 from app.models.violation import Violation, ViolationType, ViolationSeverity, ViolationStatus
 from app.models.policy_template import PolicyTemplate
+from app.core.security import get_password_hash
 
 def seed_database():
     """Seed the database with initial sample data"""
@@ -21,7 +22,7 @@ def seed_database():
             User(
                 username="admin",
                 email="admin@sentinelai.ai",
-                hashed_password="$2b$12$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW",  # Password: "secret"
+                hashed_password=get_password_hash("2501"),  # Password: "2501"
                 role=UserRole.ADMIN
             ),
             User(

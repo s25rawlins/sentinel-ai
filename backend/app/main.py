@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.database.base import engine, Base
-from app.api import policies, events, dashboard, violations
+from app.api import policies, events, dashboard, violations, auth
 from app.services.data_seeder import seed_database
 
 Base.metadata.create_all(bind=engine)
@@ -20,6 +20,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(auth.router, prefix="/api/auth", tags=["authentication"])
 app.include_router(policies.router, prefix="/api/policies", tags=["policies"])
 app.include_router(events.router, prefix="/api/events", tags=["events"])
 app.include_router(dashboard.router, prefix="/api/dashboard", tags=["dashboard"])

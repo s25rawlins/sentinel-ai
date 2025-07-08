@@ -5,10 +5,15 @@ import Policies from './components/Policies';
 import Events from './components/Events';
 import Violations from './components/Violations';
 import Navigation from './components/Navigation';
+import Homepage from './components/Homepage';
+import Login from './components/Login';
+import ProtectedRoute from './components/ProtectedRoute';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-function App() {
+const AppContent: React.FC = () => {
   const [darkMode, setDarkMode] = useState(false);
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
@@ -27,19 +32,44 @@ function App() {
   };
 
   return (
+    <div className="App">
+      {isAuthenticated && <Navigation darkMode={darkMode} toggleTheme={toggleTheme} />}
+      <main className={isAuthenticated ? "main-content" : ""}>
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/policies" element={
+            <ProtectedRoute>
+              <Policies />
+            </ProtectedRoute>
+          } />
+          <Route path="/events" element={
+            <ProtectedRoute>
+              <Events />
+            </ProtectedRoute>
+          } />
+          <Route path="/violations" element={
+            <ProtectedRoute>
+              <Violations />
+            </ProtectedRoute>
+          } />
+        </Routes>
+      </main>
+    </div>
+  );
+};
+
+function App() {
+  return (
     <Router>
-      <div className="App">
-        <Navigation darkMode={darkMode} toggleTheme={toggleTheme} />
-        <main className="main-content">
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/policies" element={<Policies />} />
-            <Route path="/events" element={<Events />} />
-            <Route path="/violations" element={<Violations />} />
-          </Routes>
-        </main>
-      </div>
+      <AuthProvider>
+        <AppContent />
+      </AuthProvider>
     </Router>
   );
 }
