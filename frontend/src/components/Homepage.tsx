@@ -135,17 +135,6 @@ const Homepage: React.FC = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="cta-section">
-        <div className="container">
-          <h2>Ready to Secure Your AI Applications?</h2>
-          <p>Join leading enterprises who trust SentinelAI to protect their AI infrastructure and ensure compliance.</p>
-          <button className="cta-button large" onClick={handleLoginClick}>
-            <Lock size={24} />
-            Get Started Now
-          </button>
-        </div>
-      </section>
     </div>
   );
 };

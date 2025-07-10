@@ -121,12 +121,40 @@ sentinel-ai/
 
 ## Getting Started
 
+### Quick Start (Recommended)
+
+Use the automated local development scripts for the easiest setup:
+
+#### Linux/macOS
+```bash
+# Make executable and start both servers
+chmod +x run_local.sh
+./run_local.sh
+```
+
+#### Windows
+```cmd
+# Start both servers
+run_local.bat
+```
+
+**Access Points:**
+- Frontend Application: http://localhost:3000
+- Backend API: http://localhost:8000
+- API Documentation: http://localhost:8000/docs
+
+For detailed instructions and troubleshooting, see [LOCAL_DEVELOPMENT.md](LOCAL_DEVELOPMENT.md).
+
 ### Prerequisites
 - Python 3.9+
 - Node.js 16+
 - npm or yarn
 
-### Backend Setup
+### Manual Setup (Alternative)
+
+If you prefer manual setup or the automated scripts don't work:
+
+#### Backend Setup
 
 1. **Navigate to backend directory:**
    ```bash
@@ -149,7 +177,7 @@ sentinel-ai/
    uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
    ```
 
-### Frontend Setup
+#### Frontend Setup
 
 1. **Navigate to frontend directory:**
    ```bash
